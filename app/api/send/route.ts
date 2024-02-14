@@ -10,7 +10,7 @@ export async function POST(req: Request, res: Response) {
   console.log(postData)
   try {
     const data = await resend.emails.send({
-      from: fromEmail,
+      from: fromEmail as string,
       to: postData.email,
       subject: subject,
       text:message,
