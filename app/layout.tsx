@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import GoogleCaptchaWrapper from "./GoogleCaptchaWrapper";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "react-hot-toast";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
+        <Toaster position='bottom-center' />
         <GoogleCaptchaWrapper>{children}</GoogleCaptchaWrapper>
         <SpeedInsights />
       </body>
