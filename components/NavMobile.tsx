@@ -13,11 +13,11 @@ export const NavMobile = () => {
     <div ref={ref} className='lg:hidden overflow-hidden '>
       <div
         className={cn(
-          "absolute top-10 z-20 rounded-3xl border-[1px]  border-slate-50/20",
+          "absolute top-10 z-20 rounded-3xl border-[1px] backdrop-blur-sm border-slate-50/20",
           isOpen && "bg-transparent border-0"
         )}>
         <Hamburger
-          color={isOpen ? "rgb(157 23 77)" : "rgba(203, 213, 225,0.6)"}
+          color={isOpen ? "rgb(157 23 77)" : "white"}
           toggled={isOpen}
           size={20}
           toggle={setOpen}
