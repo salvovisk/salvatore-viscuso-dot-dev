@@ -68,6 +68,10 @@ html {
   transition: opacity 2s ease-in-out;
 }
 
+.about__icon {
+  @apply w-10 h-10 lg:w-24 lg:h-24 fill-white/70 transition-colors duration-500;
+}
+
 .contacts-expanded {
   height: calc(100vh + 250px);
 }

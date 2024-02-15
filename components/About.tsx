@@ -2,6 +2,14 @@
 import { cn } from "@/utils/classMerge";
 import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
+import { FaReact, FaVuejs, FaSass } from "react-icons/fa";
+import {
+  SiNextdotjs,
+  SiNuxtdotjs,
+  SiFlutter,
+  SiTypescript,
+  SiTailwindcss,
+} from "react-icons/si";
 
 export const About = () => {
   const [hasDelayThresoldPassed, setHasDelayThresoldPassed] = useState(false);
@@ -31,17 +39,35 @@ export const About = () => {
 
         <div
           className={cn(
-            "flex flex-col lg:flex-row gap-5 py-5 px-5 lg:mt-10 rounded-2xl lg:self-center items-center lg:justify-evenly lg:w-[800px]  bg-slate-900/50 border-2 border-slate-600 text-white/70 font-bold text-2xl",
+            "flex flex-col py-5 px-5 lg:mt-10 rounded-3xl lg:self-center items-center lg:justify-evenly lg:w-[800px]  bg-slate-900/50 border-2 border-slate-600 text-white/70 font-bold text-2xl",
             hasDelayThresoldPassed ? "is-visible" : "is-hidden"
           )}>
-          <div className='flex gap-2 lg:gap-0 lg:flex-col lg:items-center'>
-            <CountUp delay={4.2} end={30} /> <p>years old</p>
-          </div>
-          <div className='flex gap-2 lg:gap-0 lg:flex-col lg:items-center'>
-            <CountUp delay={4.6} prefix='+' end={3} /> <p>of experience</p>
-          </div>
-          <div className='flex gap-2 lg:gap-0 lg:flex-col lg:items-center'>
-            <CountUp delay={4.8} end={3} /> <p>projects</p>
+          <p className=' lg:text-6xl'>Tech stack</p>
+          <div className=' mt-4 grid grid-cols-4 gap-4'>
+            <a target='_blank' href='https://react.dev/'>
+              <FaReact className='about__icon hover:fill-[#0B7EA4]/80' />
+            </a>
+            <a target='_blank' href='https://react.dev/'>
+              <SiNextdotjs className='about__icon hover:fill-black/80' />
+            </a>
+            <a href=''>
+              <FaVuejs className='about__icon hover:fill-[#42B883]/80' />
+            </a>
+            <a target='_blank' href='https://nuxt.com/'>
+              <SiNuxtdotjs className='about__icon hover:fill-[#04DC82]/80' />
+            </a>
+            <a target='_blank' href='https://tailwindcss.com/'>
+              <SiTailwindcss className='about__icon hover:fill-[#39BDF8]/80' />
+            </a>
+            <a target='_blank' href='https://sass-lang.com/'>
+              <FaSass className='about__icon hover:fill-[#CF649A]/80' />
+            </a>
+            <a target='_blank' href='https://flutter.dev/'>
+              <SiFlutter className='about__icon hover:fill-[#4DD2FD]/80' />
+            </a>
+            <a target='_blank' href='https://www.typescriptlang.org/'>
+              <SiTypescript className='about__icon hover:fill-[#3278C6]/80' />
+            </a>
           </div>
         </div>
       </div>
