@@ -6,12 +6,13 @@ import LinkedinIcon from "@/public/linkedin-icon.svg";
 import CvIcon from "@/public//cv-icon.svg";
 import { motion } from "framer-motion";
 import { AnimateChangeInHeight } from "./AnimateChangeInHeight";
-import { cn } from "@/utils/classMerge";
 import { EmailSection } from ".";
+import { cn } from "@/utils/classMerge";
 
 export const Contacts = () => {
   const [isEmailFormVisible, setIsEmailFormVisible] = useState(false);
-  const emailFormHeight = 500;
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const emailFormHeight = 420;
   const handleClick = () => {
     setIsEmailFormVisible(!isEmailFormVisible);
   };
@@ -53,7 +54,7 @@ export const Contacts = () => {
         id='contact'
         className={cn(
           `h-dvh w-dvw justify-center md:justify-start flex flex-col lg:flex-row py-0 lg:px-20 md:pt-40 lg:py-96`,
-          isEmailFormVisible && `pb-[${emailFormHeight}px]`
+          isEmailFormVisible && `contacts-expanded`
         )}>
         <div className='flex flex-col lg:w-1/2 px-10'>
           <h1 className='text-5xl lg:text-8xl font-bold text-white'>

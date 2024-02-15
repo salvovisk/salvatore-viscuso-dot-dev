@@ -16,8 +16,9 @@ export const Section = ({
   return (
     <AnimationOnScroll
       classNameInView={"fade-in-section"}
-      classNameNotInView={"fade-out-section"}>
-      <section id={title} ref={inViewRef} className='snap-start'>
+      classNameNotInView={"fade-out-section"}
+      isLast={isLast ? isLast : false}>
+      <section id={title} ref={inViewRef} className='snap-start overflow-auto'>
         {children}
       </section>
     </AnimationOnScroll>
