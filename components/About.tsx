@@ -37,38 +37,35 @@ export const About = () => {
           </p>
         </div>
 
-        <div
-          className={cn(
-            "flex flex-col py-5 px-5 lg:mt-10 rounded-3xl lg:self-center items-center lg:justify-evenly lg:w-[800px]  bg-slate-900/50 border-2 border-slate-600 text-white/70 font-bold text-2xl",
-            hasDelayThresoldPassed ? "is-visible" : "is-hidden"
-          )}>
-          <p className=' lg:text-6xl'>Tech stack</p>
-          <div className=' mt-4 grid grid-cols-4 gap-4'>
-            <a target='_blank' href='https://react.dev/'>
-              <FaReact className='about__icon hover:fill-[#0B7EA4]/80' />
-            </a>
-            <a target='_blank' href='https://react.dev/'>
-              <SiNextdotjs className='about__icon hover:fill-black/80' />
-            </a>
-            <a href=''>
-              <FaVuejs className='about__icon hover:fill-[#42B883]/80' />
-            </a>
-            <a target='_blank' href='https://nuxt.com/'>
-              <SiNuxtdotjs className='about__icon hover:fill-[#04DC82]/80' />
-            </a>
-            <a target='_blank' href='https://tailwindcss.com/'>
-              <SiTailwindcss className='about__icon hover:fill-[#39BDF8]/80' />
-            </a>
-            <a target='_blank' href='https://sass-lang.com/'>
-              <FaSass className='about__icon hover:fill-[#CF649A]/80' />
-            </a>
-            <a target='_blank' href='https://flutter.dev/'>
-              <SiFlutter className='about__icon hover:fill-[#4DD2FD]/80' />
-            </a>
-            <a target='_blank' href='https://www.typescriptlang.org/'>
-              <SiTypescript className='about__icon hover:fill-[#3278C6]/80' />
-            </a>
-          </div>
+        <p className='text-center md:text-left text-2xl lg:text-4xl font-bold text-white/70'>
+          Tech stack
+        </p>
+
+        <div className='self-center md:self-start  mt-4 grid grid-cols-4 gap-4 '>
+          <a target='_blank' href='https://react.dev/'>
+            <FaReact className='about__icon hover:fill-[#0B7EA4]/80' />
+          </a>
+          <a target='_blank' href='https://react.dev/'>
+            <SiNextdotjs className='about__icon hover:fill-black/80' />
+          </a>
+          <a href=''>
+            <FaVuejs className='about__icon hover:fill-[#42B883]/80' />
+          </a>
+          <a target='_blank' href='https://nuxt.com/'>
+            <SiNuxtdotjs className='about__icon hover:fill-[#04DC82]/80' />
+          </a>
+          <a target='_blank' href='https://tailwindcss.com/'>
+            <SiTailwindcss className='about__icon hover:fill-[#39BDF8]/80' />
+          </a>
+          <a target='_blank' href='https://sass-lang.com/'>
+            <FaSass className='about__icon hover:fill-[#CF649A]/80' />
+          </a>
+          <a target='_blank' href='https://flutter.dev/'>
+            <SiFlutter className='about__icon hover:fill-[#4DD2FD]/80' />
+          </a>
+          <a target='_blank' href='https://www.typescriptlang.org/'>
+            <SiTypescript className='about__icon hover:fill-[#3278C6]/80' />
+          </a>
         </div>
       </div>
     </>
