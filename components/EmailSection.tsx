@@ -57,11 +57,12 @@ export const EmailSection = (props: ChildComponentProps) => {
           .then((error) => {
             console.log(error);
             setSendingEmail(false);
+            e.target.reset();
           }),
         {
           loading: "Sending email...",
           success: "Email sent correctly! Thank you :)",
-          error: (err) => err.response.data.msg,
+          error: "There's been an error. Try again later",
         },
         {
           style: {
@@ -70,12 +71,17 @@ export const EmailSection = (props: ChildComponentProps) => {
           success: {
             duration: 3000,
           },
+          error: {
+            duration: 3000,
+          },
         }
       );
     } else {
-      toast.error(
-        "Sorry but this form is protected by reCaptcha and it looks like you are a robot 🤖 "
-      );
+      toast("Sorry but it looks like you are a robot", {
+        icon: "🤖",
+        duration: 3000,
+      });
+      setSendingEmail(false);
       console.log(`Failure with score: ${response?.data?.score}`);
     }
   };
