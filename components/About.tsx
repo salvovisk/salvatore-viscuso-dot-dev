@@ -1,7 +1,7 @@
 import React from "react";
 import IconTech from "./IconTech";
 
-const techStack = [
+export const techStack = [
   {
     name: "Flutter",
     value: "flutter",
@@ -41,8 +41,8 @@ const techStack = [
 
 const About = () => {
   return (
-    <div className='shadow-inner w-full bg-background h-full justify-center items-center md:justify-start pt-40 px-20 flex flex-col'>
-      <div className='flex flex-col gap-6'>
+    <div className='shadow-inner w-full bg-background h-full justify-center items-center md:justify-start pt-32 px-20 sm:pb-40 pb-20 flex flex-col'>
+      <div className='w-screen md:w-full max-w-[1200px] flex flex-col gap-6 lg:px-36 px-10'>
         <p className='text-4xl text-white font-extralight'>About</p>
         <div className='flex items-start gap-2'>
           <div className='bg-accent mt-3 w-48 h-[2px]'></div>
@@ -57,7 +57,7 @@ const About = () => {
           </span>
         </div>
       </div>
-      <div className='max-w-[700px]'>
+      <div className='w-screen max-w-[700px]'>
         <p className='text-4xl pt-10 mt-20 mb-4 text-white font-extralight text-center'>
           Tech stack
         </p>

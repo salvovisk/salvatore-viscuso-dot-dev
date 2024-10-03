@@ -10,41 +10,21 @@ const workExperiences: WorkExperience[] = [
   },
   {
     year: "2021",
+    onGoing: true,
     company: "TuiMusement",
     role: "Software engineer",
     description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae obcaecati exercitationem omnis, facilis rerum placeat consequatur, porro officia, inventore ut neque. Ducimus in unde ea voluptatibus architecto odit impedit optio?",
-  },
-  {
-    year: "2020",
-    company: "Edgemony",
-    role: "DevBootcamp",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae obcaecati",
-  },
-  {
-    year: "2024",
-    company: "TuiMusement",
-    role: "Software engineer",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae obcaecati exercitationem omnis, facilis rerum placeat consequatur, porro officia, inventore ut neque. Ducimus in unde ea voluptatibus architecto odit impedit optio?",
-  },
-  {
-    year: "2024",
-    company: "TuiMusement",
-    role: "Software engineer",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae obcaecati exercitationem omnis, facilis rerum placeat consequatur, porro officia, inventore ut neque. Ducimus in unde ea voluptatibus architecto odit impedit optio?",
+      "Currently part of a team that developed and succesfully launched a mobile app made with Flutter. All of our products are build with a combination of the following technologies, which I get to use everyday in my job.",
   },
 ];
 
 const Experiences = () => {
   return (
-    <div className='bg-backgroundVariant h-screen'>
-      <p className='text-4xl pt-10 mt-20 mb-4 text-white font-extralight'>
-        Experience
-      </p>
-      <div className='flex flex-wrap gap-4 justify-center'>
+    <div className='bg-backgroundVariant px-6 md:px-20 py-10 w-screen h-[800px] md:h-[650px]'>
+      <div className='md:ml-10 max-w-[1000px] md:w-full'>
+        <p className='text-4xl mb-20 text-white font-extralight'>Experience</p>
+      </div>
+      <div className='w-full flex flex-col gap-4 items-start md:items-center h-full'>
         {workExperiences.map((i, index) => (
           <TimelineElement key={index} workExperience={i} />
         ))}

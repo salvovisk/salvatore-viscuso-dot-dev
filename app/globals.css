@@ -4,7 +4,8 @@
 
 html {
   user-select: none;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
+  padding: 0;
 }
 .grecaptcha-badge {
   visibility: hidden !important;
@@ -23,6 +24,7 @@ html {
     --background-end-rgb: 0, 0, 0;
   }
 }
+
 *::-webkit-scrollbar {
   display: none;
 }

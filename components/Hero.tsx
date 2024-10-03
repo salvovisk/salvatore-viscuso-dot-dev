@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className='w-full bg-backgroundVariant h-full justify-center items-center md:justify-start px-40 flex'>
+    <div className='w-screen  bg-backgroundVariant h-dvh justify-center items-center md:justify-start px-40 flex'>
       <div className='font-medium text-white flex flex-col gap-4 w-[600px]'>
         <p className='text-accent text-6xl'>Salvatore Viscuso</p>
         <p className='text-2xl'>Front end & mobile developer</p>
@@ -20,12 +20,9 @@ const Hero = () => {
           </Button>
         </Link>
       </div>
-      {/*   <div className='absolute bottom-0 right-14'>
-        <Image alt='' src='/hero_background.png' width={800} height={800} />
-      </div> */}
-      <div className='flex flex-col gap-6 items-center absolute bottom-20 right-40'>
-        <div className='bg-accent w-[2px] h-36' />
-        <div className='socials flex flex-col gap-2 self-center md:self-start items-center'>
+      <div className='flex flex-col gap-6 items-center absolute bottom-20 md:right-40'>
+        <div className='bg-accent w-44  h-[1px] md:w-[1px] md:h-32' />
+        <div className='socials flex  md:flex-col gap-2 self-center md:self-start items-center'>
           <a target='_blank' href='https://github.com/salvovisk'>
             <GrGithub className='text-[#ADB7BE]' size={30} />
           </a>
