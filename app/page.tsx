@@ -1,10 +1,15 @@
 "use client";
 
-import { About, Contacts, Hero, Nav, Projects, Section } from "@/components";
 import React, { useState } from "react";
 import { InView } from "react-intersection-observer";
-
-const sections = ["home", "about", "projects", "contacts"];
+import Nav from "../components/NavBar";
+import { Section } from "@/components/Section";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Portfolio from "@/components/Portfolio";
+import Experiences from "@/components/Experiences";
+import Contacts from "@/components/Contacts";
+const sections = ["home", "about", "portfolio", "contacts"];
 
 export default function Home() {
   const [visibleSection, setVisibleSection] = useState(sections[0]);
@@ -15,46 +20,45 @@ export default function Home() {
     }
   };
   return (
-    <div className='h-full bg-main-bg bg-center bg-fill'>
+    <main className='h-full w-screen bg-background'>
       <Nav visibleSection={visibleSection} />
-      <div className='overflow-scroll snap-y snap-mandatory h-screen w-screen'>
-        <InView onChange={setInView} threshold={0.5}>
-          {({ ref: inViewRef }) => {
-            return (
-              <Section title={"home"} inViewRef={inViewRef}>
-                <Hero />
-              </Section>
-            );
-          }}
-        </InView>
-        <InView onChange={setInView} threshold={0.5}>
-          {({ ref: inViewRef }) => {
-            return (
-              <Section title={"about"} inViewRef={inViewRef}>
-                <About />
-              </Section>
-            );
-          }}
-        </InView>
-        <InView onChange={setInView} threshold={0.5}>
-          {({ ref: inViewRef }) => {
-            return (
-              <Section title={"projects"} inViewRef={inViewRef}>
-                <Projects />
-              </Section>
-            );
-          }}
-        </InView>
-        <InView onChange={setInView} threshold={0.5}>
-          {({ ref: inViewRef }) => {
-            return (
-              <Section isLast title={"contacts"} inViewRef={inViewRef}>
-                <Contacts />
-              </Section>
-            );
-          }}
-        </InView>
-      </div>
-    </div>
+      <InView onChange={setInView} threshold={0.8}>
+        {({ ref: inViewRef }) => {
+          return (
+            <Section title={"home"} inViewRef={inViewRef}>
+              <Hero />
+            </Section>
+          );
+        }}
+      </InView>
+      <InView onChange={setInView} threshold={0.8}>
+        {({ ref: inViewRef }) => {
+          return (
+            <Section title={"about"} inViewRef={inViewRef}>
+              <About />
+            </Section>
+          );
+        }}
+      </InView>
+      <Experiences />
+      <InView onChange={setInView} threshold={0.8}>
+        {({ ref: inViewRef }) => {
+          return (
+            <Section title={"portfolio"} inViewRef={inViewRef}>
+              <Portfolio />
+            </Section>
+          );
+        }}
+      </InView>
+      <InView onChange={setInView} threshold={0.8}>
+        {({ ref: inViewRef }) => {
+          return (
+            <Section title={"contacts"} inViewRef={inViewRef}>
+              <Contacts />
+            </Section>
+          );
+        }}
+      </InView>
+    </main>
   );
 }

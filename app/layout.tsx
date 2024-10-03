@@ -4,6 +4,11 @@ import "./globals.css";
 import GoogleCaptchaWrapper from "./GoogleCaptchaWrapper";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={montserrat.className}>
         <Toaster position='bottom-center' />
         <GoogleCaptchaWrapper>{children}</GoogleCaptchaWrapper>
         <SpeedInsights />
