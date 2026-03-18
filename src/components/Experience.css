@@ -1,0 +1,199 @@
+.experience__layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.experience__sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.experience__sticky-label {
+  margin-bottom: 0;
+}
+
+/* ── Timeline container ──────────────────────────────────────────────────── */
+.experience__entries {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Vertical timeline rule */
+.experience__entries::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 48px;
+  width: 1px;
+  background: var(--border);
+}
+
+/* ── Single entry ────────────────────────────────────────────────────────── */
+.exp__entry {
+  padding: 0 0 clamp(40px, 6vw, 64px) 32px;
+  position: relative;
+}
+
+/* Timeline dot */
+.exp__entry::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--accent);
+  transition: background-color 0.2s ease;
+}
+
+.exp__entry:hover::before {
+  background: var(--accent);
+}
+
+/* Date + watermark row */
+.exp__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.exp__date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Large italic year — decorative watermark */
+.exp__year-mark {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ink);
+  opacity: 0.04;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  user-select: none;
+  transition: opacity 0.3s ease;
+}
+
+.exp__entry:hover .exp__year-mark {
+  opacity: 0.09;
+}
+
+/* Company name */
+.exp__company {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+  transition: color 0.2s ease;
+}
+
+.exp__entry:hover .exp__company {
+  color: var(--accent);
+}
+
+/* Role badge */
+.exp__role {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.exp__role::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+/* Bullets */
+.exp__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exp__bullets li {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--ink-2);
+  line-height: 1.7;
+  padding-left: 20px;
+  position: relative;
+}
+
+.exp__bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 8px;
+  height: 1px;
+  background: var(--ink-3);
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.exp__entry:hover .exp__bullets li::before {
+  width: 12px;
+  background: var(--accent);
+}
+
+.exp__divider {
+  display: none; /* replaced by spacing + timeline */
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .experience__layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .experience__sidebar {
+    position: static;
+    margin-bottom: 40px;
+  }
+
+  .experience__entries::before {
+    left: 0;
+  }
+
+  .exp__entry {
+    padding-left: 28px;
+  }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .exp__year-mark {
+    display: none;
+  }
+
+  .exp__company {
+    font-size: clamp(1.4rem, 7vw, 2rem);
+  }
+}
