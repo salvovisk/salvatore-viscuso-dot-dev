@@ -1,0 +1,115 @@
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+  align-items: start;
+}
+
+.about__quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  quotes: '\201C' '\201D';
+  border: none;
+}
+
+.about__quote::before {
+  content: open-quote;
+  color: var(--accent);
+}
+
+.about__bio {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about__bio p {
+  font-size: clamp(0.9rem, 1.3vw, 1rem);
+  font-weight: 300;
+  color: var(--ink-2);
+  line-height: 1.75;
+}
+
+.about__bio em {
+  font-family: var(--font-display);
+  font-size: 1.1em;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.about__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.about__chip {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.about__chip--link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Stats */
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+.about__stat {
+  padding: clamp(24px, 4vw, 40px) clamp(20px, 3vw, 32px);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.about__stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+}
+
+.about__stat-label {
+  font-size: 0.68rem;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 56px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about__stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
