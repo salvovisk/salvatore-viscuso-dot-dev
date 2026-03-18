@@ -1,0 +1,138 @@
+.contact {
+  background: var(--bg-2);
+  transition: background-color 0.3s ease;
+}
+
+.contact__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(40px, 6vw, 60px);
+}
+
+.contact__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 7vw, 7rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+}
+
+.contact__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.contact__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Email link */
+.contact__email {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.2s ease;
+  word-break: break-all;
+}
+
+.contact__email::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact__email:hover {
+  color: var(--accent);
+}
+
+.contact__email:hover::after {
+  width: 100%;
+}
+
+/* Socials */
+.contact__socials {
+  display: flex;
+  gap: 20px;
+}
+
+.contact__social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-3);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.contact__social:hover {
+  color: var(--accent);
+}
+
+/* SVG draw-on effect
+   Single layer. Idle: dashoffset 0 (fully drawn).
+   Hover: animation fires — erases then redraws — same color throughout.
+   On hover exit: animation removed, element reverts to idle dashoffset 0.
+*/
+.social-svg {
+  display: block;
+}
+
+.social-svg__border,
+.social-svg__path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.contact__social:hover .social-svg__border {
+  animation: svg-trace 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.contact__social:hover .social-svg__path {
+  animation: svg-trace 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+@keyframes svg-trace {
+  0%   { stroke-dashoffset: 0; }
+  45%  { stroke-dashoffset: 1; }
+  46%  { stroke-dashoffset: -1; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Footer */
+.contact__footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  font-size: 0.68rem;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+}
+
+.contact__footer-note {
+  color: var(--ink-3);
+}
+
+@media (max-width: 600px) {
+  .contact__footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
