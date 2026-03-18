@@ -1,0 +1,140 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 120px;
+  padding-top: 0;
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.hero__label {
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  display: block;
+  opacity: 0;
+  animation: fadeInLabel 0.6s ease forwards;
+  animation-delay: 0.05s;
+}
+
+@keyframes fadeInLabel {
+  to { opacity: 1; }
+}
+
+.hero__headline {
+  margin-bottom: 28px;
+  container-type: inline-size;
+}
+
+.hero__line-wrap {
+  overflow: clip;
+  overflow-clip-margin: 0.05em;
+  line-height: 0.9;
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 16cqw, 14rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  color: var(--ink);
+  opacity: 0; /* set by JS */
+  white-space: nowrap;
+}
+
+.hero__name--2 {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.hero__rule {
+  margin-bottom: 56px;
+  opacity: 0; /* overridden by JS */
+}
+
+.hero__bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  opacity: 0; /* overridden by JS */
+}
+
+.hero__tagline {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 300;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.hero__tagline em {
+  font-family: var(--font-display);
+  font-size: 1.15em;
+  color: var(--ink);
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--bg);
+  background: var(--ink);
+  padding: 14px 28px;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+  transition: background-color 0.25s ease, transform 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+
+.hero__cta:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translate(-2px, -2px);
+}
+
+.hero__cta svg {
+  transition: transform 0.25s ease;
+}
+
+.hero__cta:hover svg {
+  transform: translateX(4px);
+}
+
+
+@media (max-width: 768px) {
+  .hero__rule     { margin-bottom: 36px; }
+  .hero__label    { margin-bottom: 28px; }
+  .hero__headline { margin-bottom: 20px; }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-bottom: 80px;
+    min-height: 100svh;
+  }
+
+  .hero__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .hero__cta {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
