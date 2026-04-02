@@ -1,0 +1,9 @@
+services:
+  salvatore-viscuso-dot-dev:
+    build: .
+    container_name: salvatore-viscuso-dot-dev
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    env_file:
+      - .env
