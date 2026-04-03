@@ -4,6 +4,7 @@ services:
     container_name: salvatore-viscuso-dot-dev
     restart: unless-stopped
     ports:
-      - "90:90"
+      - "80:80"
     env_file:
-      - .env
+      - path: .env
+        required: false
