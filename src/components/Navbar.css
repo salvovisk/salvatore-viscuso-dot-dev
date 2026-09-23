@@ -9,7 +9,7 @@
 }
 
 .navbar--scrolled {
-  background-color: color-mix(in srgb, var(--bg) 80%, transparent);
+  background-color: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom-color: var(--border);
@@ -36,10 +36,14 @@
 }
 
 .navbar__progress-bar {
+  /* Driven by transform, not width: the bar updates on every scroll frame, and width
+     forces a layout pass each time while scaleX stays on the compositor. */
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
   height: 100%;
   background: var(--accent);
-  transition: width 0.1s linear;
-  transform-origin: left;
+  will-change: transform;
 }
 
 .navbar__inner {
@@ -61,6 +65,11 @@
   letter-spacing: -0.01em;
   transition: color 0.2s ease;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-right: 8px;
 }
 
 .navbar__logo:hover {
@@ -125,11 +134,14 @@
   font-weight: 400;
   letter-spacing: 0.1em;
   color: var(--ink-2);
-  padding: 4px 8px;
-  border: 1px solid var(--border);
+  padding: 4px 12px;
+  border: 1px solid var(--border-strong);
   border-radius: 2px;
   transition: color 0.2s ease, border-color 0.2s ease;
   line-height: 1;
+  /* 44px of target without 44px of visual weight. */
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .navbar__toggle-lang:hover {
@@ -141,8 +153,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   color: var(--ink-2);
   transition: color 0.2s ease, transform 0.2s ease;
   border-radius: 50%;
@@ -156,8 +168,8 @@
 /* Hamburger */
 .navbar__hamburger {
   display: none;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   position: relative;
   z-index: 201;
   flex-shrink: 0;
@@ -166,7 +178,7 @@
 .navbar__hamburger span {
   display: block;
   position: absolute;
-  left: 8px;
+  left: 12px;
   width: 20px;
   height: 1.5px;
   background: var(--ink);
@@ -176,9 +188,9 @@
   will-change: transform, opacity;
 }
 
-.navbar__hamburger span:nth-child(1) { top: 12px; }
-.navbar__hamburger span:nth-child(2) { top: 17px; }
-.navbar__hamburger span:nth-child(3) { top: 22px; }
+.navbar__hamburger span:nth-child(1) { top: 16px; }
+.navbar__hamburger span:nth-child(2) { top: 21px; }
+.navbar__hamburger span:nth-child(3) { top: 26px; }
 
 .navbar__hamburger.is-open span:nth-child(1) {
   transform: translateY(5px) rotate(45deg);
@@ -289,4 +301,10 @@
   .navbar__hamburger {
     display: flex;
   }
+}
+
+/* The overlay's language toggle is a real control on a phone; give it a real target. */
+.navbar__overlay-lang {
+  min-height: 44px;
+  min-width: 44px;
 }

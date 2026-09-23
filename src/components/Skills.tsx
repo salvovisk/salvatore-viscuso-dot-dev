@@ -5,9 +5,13 @@ import ShapeLayer from './ShapeLayer'
 import type { ShapeDefinition } from '../types'
 import './Skills.css'
 
-const PRIMARY = ['React', 'TypeScript', 'Next.js', 'Vue', 'Flutter']
+// Only what the project ledger and the experience entries actually back. Vue sits in the
+// secondary list beside Nuxt; Flutter came out entirely — nothing on this site uses it, and
+// an unbacked claim beside a verifiable one costs more than it adds.
+const PRIMARY = ['React', 'TypeScript', 'Next.js', 'React Native']
 
 const SECONDARY = [
+  { name: 'Vue',             tag: 'framework' },
   { name: 'Nuxt',            tag: 'framework' },
   { name: 'CSS / Sass',      tag: 'styling'   },
   { name: 'Tailwind',        tag: 'styling'   },
@@ -38,9 +42,8 @@ export default function Skills() {
 
           {/* Left — primary identity stack */}
           <div className="skills__primary">
-            {PRIMARY.map((name, i) => (
+            {PRIMARY.map(name => (
               <div key={name} className="skills__primary-item">
-                <span className="skills__primary-num">{String(i + 1).padStart(2, '0')}</span>
                 <span className="skills__primary-name">{name}</span>
               </div>
             ))}

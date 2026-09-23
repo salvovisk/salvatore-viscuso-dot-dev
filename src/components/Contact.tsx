@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useReveal } from '../hooks/useReveal'
 import { useLocale } from '../hooks/useLocale'
 import { email, emailHref } from '../utils/email'
@@ -42,6 +42,19 @@ const SHAPES: ShapeDefinition[] = [
 
 export default function Contact() {
   const { t } = useLocale()
+  const [copied, setCopied] = useState(false)
+  const ts = (key: Parameters<typeof t>[0]) => String(t(key))
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(email)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Clipboard is blocked in some contexts; the address is still selectable and the
+      // mailto link still works, so there is nothing to recover from.
+    }
+  }
   const headRef = useRef<HTMLDivElement>(null)
   const bodyRef = useRef<HTMLDivElement>(null)
 
@@ -60,9 +73,16 @@ export default function Contact() {
         </div>
 
         <div ref={bodyRef} className="contact__body reveal" style={{ transitionDelay: '0.15s' }}>
-          <a href={emailHref} className="contact__email">
-            {email}
-          </a>
+          <div className="contact__email-row">
+            <a href={emailHref} className="contact__email">
+              {email}
+            </a>
+            {/* The one string on the page that has to be transcribed exactly. Don't make
+                anyone retype a serif address off a screen. */}
+            <button type="button" className="contact__copy font-mono" onClick={copyEmail}>
+              {copied ? ts('contact_copied') : ts('contact_copy')}
+            </button>
+          </div>
 
           <div className="contact__socials">
             <a

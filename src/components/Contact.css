@@ -136,3 +136,36 @@
     text-align: center;
   }
 }
+
+/* ── Email row: the address plus a copy affordance ─────────────────────────── */
+.contact__email-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.contact__copy {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border: 1px solid var(--border-strong);
+  border-radius: 2px;
+  /* 44px tall so it is a real target on a phone. */
+  min-height: 44px;
+  padding: 0 16px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.contact__copy:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* A text link is still a tap target. */
+.contact__email {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}

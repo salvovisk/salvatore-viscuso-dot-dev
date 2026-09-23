@@ -24,10 +24,10 @@ export default function About() {
   useReveal(statsRef)
 
   const STATS = [
-    { value: '4+', label: String(t('about_stat_experience')) },
-    { value: '3+', label: String(t('about_stat_companies')) },
-    { value: '9+', label: String(t('about_stat_projects')) },
-    { value: '∞',  label: String(t('about_stat_problems')) },
+    { value: '5+', label: String(t('about_stat_experience')) },
+    { value: '4', label: String(t('about_stat_companies')) },
+    { value: '6', label: String(t('about_stat_projects')) },
+    { value: '3', label: String(t('about_stat_platforms')) },
   ]
 
   return (

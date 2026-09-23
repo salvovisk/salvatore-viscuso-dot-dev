@@ -44,15 +44,24 @@ function Entry({ entry, delay }: EntryProps) {
 export default function Experience() {
   const { t } = useLocale()
 
+  // Reverse-chronological by start date. The two contracts overlap the full-time role on purpose.
   const ENTRIES: ExperienceEntry[] = [
     {
-      date: String(t('exp_tuimusement_date')),
-      company: 'TuiMusement',
-      role: String(t('exp_tuimusement_role')),
+      date: String(t('exp_yuxme_date')),
+      company: 'Yuxme',
+      role: String(t('exp_yuxme_role')),
       bullets: [
-        String(t('exp_tuimusement_b1')),
-        String(t('exp_tuimusement_b2')),
-        String(t('exp_tuimusement_b3')),
+        String(t('exp_yuxme_b1')),
+        String(t('exp_yuxme_b2')),
+      ],
+    },
+    {
+      date: String(t('exp_govisit_date')),
+      company: 'GoVisit',
+      role: String(t('exp_govisit_role')),
+      bullets: [
+        String(t('exp_govisit_b1')),
+        String(t('exp_govisit_b2')),
       ],
     },
     {
@@ -65,12 +74,13 @@ export default function Experience() {
       ],
     },
     {
-      date: String(t('exp_govisit_date')),
-      company: 'GoVisit Web',
-      role: String(t('exp_govisit_role')),
+      date: String(t('exp_tuimusement_date')),
+      company: 'TuiMusement',
+      role: String(t('exp_tuimusement_role')),
       bullets: [
-        String(t('exp_govisit_b1')),
-        String(t('exp_govisit_b2')),
+        String(t('exp_tuimusement_b1')),
+        String(t('exp_tuimusement_b2')),
+        String(t('exp_tuimusement_b3')),
       ],
     },
   ]
@@ -82,6 +92,11 @@ export default function Experience() {
         <div className="experience__layout">
           <div className="experience__sidebar">
             <p className="section-label experience__sticky-label">{t('experience_label')}</p>
+            {/* The sticky column was a label alone in a 220px dead third. One real figure
+                earns the space without inventing anything: the entries are right there. */}
+            <p className="experience__count font-mono">
+              {ENTRIES.length} {t('experience_roles')}
+            </p>
           </div>
           <div className="experience__entries">
             {ENTRIES.map((entry, i) => (

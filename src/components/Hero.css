@@ -29,6 +29,7 @@
 }
 
 .hero__headline {
+  margin: 0;
   margin-bottom: 28px;
   container-type: inline-size;
 }
@@ -40,6 +41,7 @@
 }
 
 .hero__name {
+  display: block;
   font-family: var(--font-display);
   font-size: clamp(3rem, 16cqw, 14rem);
   font-weight: 700;
@@ -70,16 +72,38 @@
 
 .hero__tagline {
   font-family: var(--font-body);
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
   font-weight: 300;
   color: var(--ink-2);
   line-height: 1.55;
 }
 
-.hero__tagline em {
-  font-family: var(--font-display);
-  font-size: 1.15em;
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+/* The quiet second door: straight to the featured case, for the reader who wants proof first. */
+.hero__work {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+
+.hero__work:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
 }
 
 .hero__cta {
@@ -133,8 +157,18 @@
     gap: 24px;
   }
 
-  .hero__cta {
+  .hero__actions {
     align-self: stretch;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .hero__cta {
+    justify-content: center;
+  }
+
+  .hero__work {
     justify-content: center;
   }
 }

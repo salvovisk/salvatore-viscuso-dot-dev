@@ -1,7 +1,7 @@
 .experience__layout {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 80px;
+  grid-template-columns: 170px 1fr;
+  gap: 56px;
   align-items: start;
 }
 
@@ -196,4 +196,12 @@
   .exp__company {
     font-size: clamp(1.4rem, 7vw, 2rem);
   }
+}
+
+/* The one figure in the sticky column; sits under the label, not competing with it. */
+.experience__count {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
 }

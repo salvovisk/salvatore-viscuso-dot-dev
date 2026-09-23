@@ -38,28 +38,30 @@ export default function Hero() {
       <div className="container hero__inner">
         <span className="hero__label font-mono">{t('hero_label')}</span>
 
-        <div className="hero__headline">
+        <h1 className="hero__headline">
           <div className="hero__line-wrap">
-            <h1 ref={line1Ref} className="hero__name hero__name--1">SALVATORE</h1>
+            <span ref={line1Ref} className="hero__name hero__name--1">SALVATORE</span>
           </div>
           <div className="hero__line-wrap">
-            <h1 ref={line2Ref} className="hero__name hero__name--2">VISCUSO</h1>
+            <span ref={line2Ref} className="hero__name hero__name--2">VISCUSO</span>
           </div>
-        </div>
+        </h1>
 
         <hr className="hero__rule divider" ref={subRef} />
 
         <div ref={bottomRef} className="hero__bottom">
           <p className="hero__tagline">
-            {t('hero_tagline1')}<br />
-            <em>{t('hero_tagline2')}</em>
+            {t('hero_tagline1')}
           </p>
-          <a href="#contact" className="hero__cta">
-            <span>{t('hero_cta')}</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </a>
+          <div className="hero__actions">
+            <a href="#work" className="hero__work">{t('hero_cta_work')}</a>
+            <a href="#contact" className="hero__cta">
+              <span>{t('hero_cta')}</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>

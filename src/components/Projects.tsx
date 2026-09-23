@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useReveal } from '../hooks/useReveal'
 import { useLocale } from '../hooks/useLocale'
 import ShapeLayer from './ShapeLayer'
@@ -8,9 +8,9 @@ import './Projects.css'
 const PROJECT_KEYS: ProjectEntry[] = [
   {
     index: '01',
-    name: 'TuiMusement Platform',
-    tags: ['React', 'TypeScript', 'Performance'],
-    year: '2023',
+    name: 'TuiMusement',
+    tags: ['Flutter', 'Vue.js', 'React', 'Next.js'],
+    year: '2021–',
     descKey:       'proj_01_desc',
     roleKey:       'proj_01_role',
     durationKey:   'proj_01_duration',
@@ -23,7 +23,7 @@ const PROJECT_KEYS: ProjectEntry[] = [
     index: '02',
     name: 'GoVisit',
     tags: ['Next.js 15', 'TypeScript', 'Stream.io', 'Stripe'],
-    year: '2026',
+    year: '2025–26',
     descKey:       'proj_02_desc',
     roleKey:       'proj_02_role',
     durationKey:   'proj_02_duration',
@@ -34,19 +34,6 @@ const PROJECT_KEYS: ProjectEntry[] = [
   },
   {
     index: '03',
-    name: 'Design System Core',
-    tags: ['React', 'CSS', 'Figma'],
-    year: '2024',
-    descKey:       'proj_03_desc',
-    roleKey:       'proj_03_role',
-    durationKey:   'proj_03_duration',
-    highlightsKey: 'proj_03_highlights',
-    learningsKey:  'proj_03_learnings',
-    urlKey:        'proj_03_url',
-    urlCodeKey:    'proj_03_url_code',
-  },
-  {
-    index: '04',
     name: 'Portfolio',
     tags: ['React', 'Vite', 'CSS'],
     year: '2025',
@@ -57,9 +44,10 @@ const PROJECT_KEYS: ProjectEntry[] = [
     learningsKey:  'proj_04_learnings',
     urlKey:        'proj_04_url',
     urlCodeKey:    'proj_04_url_code',
+    noLinkKey:     'proj_label_this_site',
   },
   {
-    index: '05',
+    index: '04',
     name: 'Blokko',
     tags: ['Next.js', 'TypeScript', 'MUI', 'Prisma', 'Zustand'],
     year: '2026',
@@ -70,19 +58,7 @@ const PROJECT_KEYS: ProjectEntry[] = [
     learningsKey:  'proj_05_learnings',
     urlKey:        'proj_05_url',
     urlCodeKey:    'proj_05_url_code',
-  },
-  {
-    index: '06',
-    name: '9000ABCD – Simulatore Strategico',
-    tags: ['React', 'TypeScript', 'CSS'],
-    year: '2025',
-    descKey:       'proj_06_desc',
-    roleKey:       'proj_06_role',
-    durationKey:   'proj_06_duration',
-    highlightsKey: 'proj_06_highlights',
-    learningsKey:  'proj_06_learnings',
-    urlKey:        'proj_06_url',
-    urlCodeKey:    'proj_06_url_code',
+    noLinkKey:     'proj_label_private',
   },
 ]
 
@@ -112,6 +88,21 @@ function ProjectItem({ project, delay, isOpen, onToggle }: ProjectItemProps) {
   const ref = useRef<HTMLButtonElement>(null)
   const { t } = useLocale()
   useReveal(ref, { threshold: 0.08 })
+
+  // Opening a row pulls it to the top of the viewport. Without this the panel expands
+  // below the fold and, on a phone, the reader is left staring at the row they just left.
+  // The short delay lets the grid-rows transition start, so the scroll lands on the row
+  // rather than chasing a box that is still growing.
+  useEffect(() => {
+    if (!isOpen) return
+    const el = ref.current
+    if (!el) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const id = window.setTimeout(() => {
+      el.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' })
+    }, 60)
+    return () => window.clearTimeout(id)
+  }, [isOpen])
 
   const highlights = t(project.highlightsKey)
   const url        = String(t(project.urlKey))
@@ -146,8 +137,11 @@ function ProjectItem({ project, delay, isOpen, onToggle }: ProjectItemProps) {
         </span>
       </button>
 
-      {/* ── Accordion panel ── */}
-      <div className="project-panel">
+      {/* ── Accordion panel ──
+          `inert` while closed: the panel is only visually collapsed (grid-rows 0fr +
+          overflow hidden), so without it a keyboard user tabs through six invisible
+          panels' worth of links, and Ctrl+F matches text nobody can see. */}
+      <div className="project-panel" inert={!isOpen}>
         <div className="project-panel__inner">
           <div className="project-panel__body">
 
@@ -192,12 +186,15 @@ function ProjectItem({ project, delay, isOpen, onToggle }: ProjectItemProps) {
               </dl>
 
               <div className="project-panel__links">
-                {url && url !== '#' && (
+                {url && url !== '#' ? (
                   <a href={url} target="_blank" rel="noopener noreferrer" className="project-panel__cta">
                     <span>{ts('proj_label_visit')}</span>
                     <ExternalLinkIcon />
                   </a>
-                )}
+                ) : project.noLinkKey ? (
+                  /* An empty slot reads as a broken link. Say why there isn't one. */
+                  <p className="project-panel__nolink font-mono">{ts(project.noLinkKey)}</p>
+                ) : null}
                 {urlCode !== '' && (
                   <a href={urlCode} target="_blank" rel="noopener noreferrer" className="project-panel__cta project-panel__cta--ghost">
                     <span>{ts('proj_label_code')}</span>

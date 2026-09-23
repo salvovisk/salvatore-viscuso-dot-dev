@@ -10,7 +10,16 @@
   --ink-3:   #54493F;
   --accent:  #C8410B;
   --accent-2:#E8561A;
-  --border:  rgba(14,12,10,0.1);
+  --border:  rgba(14,12,10,0.16);
+  /* The table rules that carry the ledger idea. The 0.16 above stays for decorative edges. */
+  --border-strong: rgba(14,12,10,0.28);
+  --accent-fill: #C8410B;        /* white on this = 4.98:1 */
+  --accent-fill-hover: #A8350A;  /* white on this = 6.30:1 */
+  --on-accent: #FFFFFF;
+  /* Stage for product screenshots: near-black in both themes, lifted a step in dark so it
+     still reads as an object against the page. */
+  --plate: #0E0C0A;
+  --plate-edge: transparent;
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'Outfit', system-ui, sans-serif;
@@ -27,7 +36,13 @@
   --ink-3:   #AAA29A;
   --accent:  #E8561A;
   --accent-2:#FF6B2B;
-  --border:  rgba(240,235,227,0.08);
+  --border:  rgba(240,235,227,0.14);
+  --border-strong: rgba(240,235,227,0.26);
+  --accent-fill: #C8410B;
+  --accent-fill-hover: #A8350A;
+  --on-accent: #FFFFFF;
+  --plate: #161410;
+  --plate-edge: rgba(240,235,227,0.10);
 }
 
 /* ─── Reset ──────────────────────────────────────────────────────────────── */
@@ -74,6 +89,17 @@ button {
   color: inherit;
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Pointer users who click a control should not get the ring; keyboard users always should. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* ─── Typography helpers ─────────────────────────────────────────────────── */
 .font-display { font-family: var(--font-display); }
 .font-mono    { font-family: var(--font-mono); }
@@ -90,15 +116,38 @@ body::before {
 }
 
 /* ─── Scroll reveal ──────────────────────────────────────────────────────── */
-.reveal {
+/* Content is visible by default. The `js` class is set by main.tsx before first paint, so
+   only a browser that will actually run the observer ever hides anything — a crawler, a
+   link unfurler, a print render or a failed bundle still gets the whole page. */
+.js .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.reveal.visible {
+.js .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Printing never scrolls, so the observer never fires and unrevealed sections would
+   come out blank. */
+@media print {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 88px;
 }
 
 /* ─── Section base ───────────────────────────────────────────────────────── */
@@ -205,6 +254,6 @@ section > div:not(.section-shapes) {
 .divider {
   width: 100%;
   height: 1px;
-  background: var(--border);
+  background: var(--border-strong);
   border: none;
 }

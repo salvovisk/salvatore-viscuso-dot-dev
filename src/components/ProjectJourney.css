@@ -1,0 +1,240 @@
+/* ── Product journey ───────────────────────────────────────────────────────
+   A ledger of frames at the foot of a project panel. The accent is deliberately
+   absent from this block: the screenshots carry a loud colour of their own, and
+   the page only ever shows one accent at a time. See ProjectJourney.tsx.        */
+
+.journey {
+  /* The bezel is near-black in BOTH themes. It is a hard edge around a dark
+     product screen, not a surface that follows the page. */
+  --journey-bezel: #0E0C0A;
+  --journey-frame-bg: #161410;
+
+  /* The panel body already leaves 48px below itself; the ledger only adds its own rule.
+     The left margin mirrors `.project-panel__body`, so the journey stays aligned with the
+     project name above it — and drops to 0 at the same breakpoint the body does. */
+  margin: 0 0 48px 84px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.journey__head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.journey__label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.journey__intro {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+
+.journey__list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── One frame ─────────────────────────────────────────────────────────────── */
+.journey-frame {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'head head'
+    'shots text';
+  column-gap: 40px;
+  row-gap: 20px;
+  align-items: start;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.journey-frame:last-child {
+  border-bottom: none;
+  padding-bottom: 8px;
+}
+
+.journey-frame__head {
+  grid-area: head;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.journey-frame__index {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+}
+
+.journey-frame__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+/* ── Shots ─────────────────────────────────────────────────────────────────── */
+.journey-frame__shots {
+  grid-area: shots;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.journey-frame__shots.is-pair .journey-shot--web {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.journey-frame__shots.is-pair .journey-shot--app {
+  flex: 0 0 116px;
+}
+
+.journey-shot {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+/* The phone is drawn, never photographed: a stroke and a radius, no gloss, no hand. */
+.journey-shot--app {
+  flex: 0 0 168px;
+  max-width: 168px;
+}
+
+.journey-shot__frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--journey-frame-bg);
+  /* No shadow anywhere. A hairline and whitespace do the separating. */
+  border: 1px solid var(--journey-bezel);
+}
+
+.journey-shot--web .journey-shot__frame {
+  border-radius: 8px;
+}
+
+.journey-shot--app .journey-shot__frame {
+  border-width: 2px;
+  border-radius: 24px;
+}
+
+.journey-shot__frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Reduced browser chrome: three dots on a hairline, not a titlebar impersonation. */
+.journey-shot__bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  background: var(--journey-bezel);
+}
+
+.journey-shot__bar span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(240, 235, 227, 0.22);
+}
+
+.journey-shot__pending {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  color: rgba(240, 235, 227, 0.4);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.journey-shot--app .journey-shot__pending {
+  aspect-ratio: 9 / 19.5;
+}
+
+.journey-shot__route {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+  word-break: break-all;
+}
+
+/* ── Caption and the single annotation ─────────────────────────────────────── */
+.journey-frame__text {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 4px;
+}
+
+.journey-frame__caption {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+
+/* The thin bar. Ink rather than accent, for the reason in the component header. */
+.journey-frame__note {
+  border-left: 2px solid var(--ink-3);
+  padding-left: 16px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--ink-3);
+  max-width: 58ch;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .journey {
+    margin-left: 0;
+  }
+
+  .journey-frame {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'head'
+      'shots'
+      'text';
+    row-gap: 24px;
+  }
+
+  .journey-frame__shots {
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 600px) {
+  .journey {
+    margin-bottom: 32px;
+  }
+
+  .journey-frame__title {
+    font-size: 1.25rem;
+  }
+
+  .journey-frame__shots.is-pair {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .journey-frame__shots.is-pair .journey-shot--app {
+    flex: 0 0 auto;
+    max-width: 168px;
+  }
+}

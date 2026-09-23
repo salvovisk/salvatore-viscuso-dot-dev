@@ -49,13 +49,23 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
   ]
 
   useEffect(() => {
+    // The listener fired on every scroll tick and wrote state each time. Coalescing to one
+    // update per animation frame keeps it to a single render per painted frame.
+    let frame = 0
     const onScroll = () => {
-      setScrolled(window.scrollY > 40)
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      setProgress(docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0)
+      if (frame) return
+      frame = window.requestAnimationFrame(() => {
+        frame = 0
+        setScrolled(window.scrollY > 40)
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight
+        setProgress(docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0)
+      })
     }
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
   }, [])
 
   // Active section via IntersectionObserver
@@ -76,7 +86,9 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
         visible.forEach((ratio, id) => {
           if (ratio > bestRatio) { bestRatio = ratio; best = id }
         })
-        if (best) setActiveSection(best)
+        // Setting only on a hit meant the value never reset: at scroll 0, with the hero
+        // filling the screen and no section intersecting, ABOUT stayed underlined.
+        setActiveSection(best)
       },
       { threshold: [0.1, 0.3, 0.5, 0.7], rootMargin: '-60px 0px 0px 0px' }
     )
@@ -98,7 +110,7 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
     <>
     <header className={`navbar${scrolled ? ' navbar--scrolled' : ''}${menuOpen ? ' menu-open' : ''}`}>
       <div className="navbar__progress" aria-hidden="true">
-        <div className="navbar__progress-bar" style={{ width: `${progress}%` }} />
+        <div className="navbar__progress-bar" style={{ transform: `scaleX(${progress / 100})` }} />
       </div>
 
       <div className="navbar__inner container">

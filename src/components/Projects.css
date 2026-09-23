@@ -20,6 +20,11 @@
   transition: border-left-color 0.25s ease;
 }
 
+/* An opened row scrolls itself to the top; the offset clears the fixed navbar. */
+.project-item {
+  scroll-margin-top: 88px;
+}
+
 .project-item.is-open {
   border-left-color: var(--accent);
 }
@@ -37,13 +42,26 @@
   background: none;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, padding-left 0.25s ease;
+  transition: background-color 0.2s ease;
 }
 
 .project-item.is-open .project-row,
 .project-row:hover {
   background-color: color-mix(in srgb, var(--ink) 3%, transparent);
-  padding-left: 16px;
+}
+
+/* The indent on hover/open is a translate, not padding: padding reflowed the whole grid
+   row on every hover. Year and chevron stay put as the row's fixed right edge. */
+.project-row__index,
+.project-row__name,
+.project-row__tags {
+  --row-shift: 16px;
+  transition: translate 0.25s ease, color 0.2s ease;
+}
+
+.project-item.is-open :is(.project-row__index, .project-row__name, .project-row__tags),
+.project-row:hover :is(.project-row__index, .project-row__name, .project-row__tags) {
+  translate: var(--row-shift) 0;
 }
 
 /* ── Row cells ────────────────────────────────────────────────────────────── */
@@ -53,7 +71,7 @@
   font-weight: 300;
   font-style: italic;
   color: var(--ink-3);
-  transition: color 0.2s ease;
+  transition: translate 0.25s ease, color 0.2s ease;
 }
 
 .project-item.is-open .project-row__index,
@@ -67,7 +85,7 @@
   font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.02em;
-  transition: color 0.2s ease;
+  transition: translate 0.25s ease, color 0.2s ease;
 }
 
 .project-item.is-open .project-row__name,
@@ -280,18 +298,21 @@
 
 /* Filled */
 .project-panel__cta:not(.project-panel__cta--ghost) {
-  background: var(--accent);
-  color: #fff;
+  /* Not --accent: white on the dark-theme accent measured 3.63:1, an AA failure at 10.9px. */
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  min-height: 44px;
 }
 
 .project-panel__cta:not(.project-panel__cta--ghost):hover {
-  background: var(--accent-2);
+  background: var(--accent-fill-hover);
 }
 
 /* Ghost */
 .project-panel__cta--ghost {
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   color: var(--ink-2);
+  min-height: 44px;
 }
 
 .project-panel__cta--ghost:hover {
@@ -331,23 +352,49 @@
 @media (max-width: 600px) {
   .projects__header { display: none; }
 
-  .project-item.is-open .project-row,
-  .project-row:hover { padding-left: 12px; }
+  .project-row__index,
+  .project-row__name,
+  .project-row__tags { --row-shift: 12px; }
 
+  /* The row keeps its ledger grammar on a phone instead of collapsing to a bare name:
+     a mono meta line (index · year · chevron), then the title, then the stack. The chevron
+     is the only signal that a case study exists behind the row, so it must never be hidden
+     on the device where most of the traffic lands. */
   .project-row {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    padding: 24px 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "index year chevron"
+      "name  name name"
+      "tags  tags tags";
+    align-items: center;
+    gap: 8px 10px;
+    padding: 22px 0;
   }
 
-  .project-row__index { font-size: 0.78rem; }
-  .project-row__name  { font-size: clamp(1.3rem, 6vw, 1.7rem); }
-  .project-row__year  { display: none; }
-  .project-row__tags  { display: flex; flex-wrap: wrap; }
+  .project-row__index   { grid-area: index; font-size: 0.78rem; }
+  .project-row__name    { grid-area: name; font-size: clamp(1.3rem, 6vw, 1.7rem); }
+  .project-row__tags    { grid-area: tags; display: flex; flex-wrap: wrap; }
   .project-row__tags .project-row__tag:nth-child(n+4) { display: none; }
-  .project-row__chevron { display: none; }
+
+  .project-row__year {
+    grid-area: year;
+    display: block;
+    justify-self: start;
+    font-size: 0.72rem;
+  }
+
+  .project-row__year::before {
+    content: "·";
+    margin-right: 10px;
+    color: var(--ink-3);
+  }
+
+  .project-row__chevron {
+    grid-area: chevron;
+    display: flex;
+    justify-self: end;
+  }
 
   .project-panel__body {
     grid-template-columns: 1fr;
@@ -373,4 +420,12 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+}
+
+/* Stands in for the CTA when a project has no public link, so the slot never reads as broken. */
+.project-panel__nolink {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  padding: 10px 0;
 }
